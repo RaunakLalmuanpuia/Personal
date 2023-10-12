@@ -32,7 +32,8 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         $roles = Role::all();
-        return Inertia::render('admin/permissions/edit', ['permission' => $permission, 'roles' => $roles]);
+        $rolesWithPermission = $permission->roles;
+        return Inertia::render('admin/permissions/edit', ['permission' => $permission, 'roles' => $roles, 'rolesWithPermission' => $rolesWithPermission]);
     }
 
     public function update(Request $request, Permission $permission)
