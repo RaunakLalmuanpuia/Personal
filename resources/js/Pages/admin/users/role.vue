@@ -1,20 +1,20 @@
 <template>
-  <div class="py-12 w-full">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+  <div class="w-full py-12">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="p-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
         <div class="flex p-2">
-          <Link :href="route('admin.users.index')" class="px-4 py-2 bg-green-700 hover:bg-green-500 text-slate-100 rounded-md">Users Index</Link>
+          <Link :href="route('admin.users.index')" class="px-4 py-2 bg-green-700 rounded-md hover:bg-green-500 text-slate-100">Users Index</Link>
 
         </div>
         <div class="flex flex-col p-2 bg-slate-100">
           <div>User Name: {{ user.name }}</div>
           <div>User Email: {{ user.email }}</div>
         </div>
-        <div class="mt-6 p-2 bg-slate-100">
+        <div class="p-2 mt-6 bg-slate-100">
           <h2 class="text-2xl font-semibold">Roles</h2>
-          <div class="flex space-x-2 mt-4 p-2">
+          <div class="flex p-2 mt-4 space-x-2">
             <template v-if="user.roles.length > 0">
-              <form v-for="role in user.roles" :key="role.id" @submit.prevent="removeRole(role.id)" class="px-4 py-2 bg-red-500 hover-bg-red-700 text-white rounded-md">
+              <form v-for="role in user.roles" :key="role.id" @submit.prevent="removeRole(role.id)" class="px-4 py-2 text-white bg-red-500 rounded-md hover-bg-red-700">
                 <button type="submit">{{ role.name }}</button>
               </form>
             </template>
@@ -24,23 +24,23 @@
               
               <div class="sm:col-span-6">
                 <label for="role" class="block text-sm font-medium text-gray-700">Roles</label>
-                <select v-model="selectedRole" id="role" name="role" autocomplete="role-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <select v-model="selectedRole" id="role" name="role" autocomplete="role-name" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <option v-for="role in roles" :value="role.name">{{ role.name }}</option>
                 </select>
               </div>
-              <span v-if="errors.role" class="text-red-400 text-sm">{{ errors.role }}</span>
-              <div class="sm:col-span-6 pt-5">
-                <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-md">Assign</button>
+              <span v-if="errors.role" class="text-sm text-red-400">{{ errors.role }}</span>
+              <div class="pt-5 sm:col-span-6">
+                <button type="submit" class="px-4 py-2 bg-green-500 rounded-md hover:bg-green-700">Assign</button>
               </div>
             </form>
           </div>
         </div>
-        <div class="mt-6 p-2 bg-slate-100">
+        <div class="p-2 mt-6 bg-slate-100">
           <h2 class="text-2xl font-semibold">Permissions</h2>
-          <div class="flex space-x-2 mt-4 p-2">
+          <div class="flex p-2 mt-4 space-x-2">
             <template v-if="userPermissions.length > 0">
-              <form v-for="permission in userPermissions" :key="permission.id" @submit.prevent="revokePermission(permission.id)" class="px-4 py-2 bg-red-500 hover-bg-red-700 text-white rounded-md">
-                <button type="submit">{{ permission.name }}</button>
+              <form v-for="userPermissions in userPermissions" :key="userPermissions.id" @submit.prevent="revokePermission(userPermissions.id)" class="px-4 py-2 text-white bg-red-500 rounded-md hover-bg-red-700">
+                <button type="submit">{{ userPermissions.name }}</button>
               </form>
             </template>
           </div>
@@ -49,13 +49,13 @@
              
               <div class="sm:col-span-6">
                 <label for="permission" class="block text-sm font-medium text-gray-700">Permission</label>
-                <select v-model="selectedPermission" id="permission" name="permission" autocomplete="permission-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <select v-model="selectedPermission" id="permission" name="permission" autocomplete="permission-name" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <option v-for="permission in permissions" :value="permission.name">{{ permission.name }}</option>
                 </select>
               </div>
-              <span v-if="errors.permission" class="text-red-400 text-sm">{{ errors.permission }}</span>
-              <div class="sm:col-span-6 pt-5">
-                <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-md">Assign</button>
+              <span v-if="errors.permission" class="text-sm text-red-400">{{ errors.permission }}</span>
+              <div class="pt-5 sm:col-span-6">
+                <button type="submit" class="px-4 py-2 bg-green-500 rounded-md hover:bg-green-700">Assign</button>
               </div>
             </form>
           </div>

@@ -2,12 +2,13 @@
 
 
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,13 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        $user = Auth::user();
+        $userRole = $user->roles->first()->name;
+        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray(); // Use Spatie's method to get permission names
+        return Inertia::render('Dashboard', [
+            'userRole' => $userRole,
+            'userPermissions' => $userPermissions,
+        ]);
     })->name('dashboard');
 });
 

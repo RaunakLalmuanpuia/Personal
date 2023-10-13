@@ -32,7 +32,7 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         $roles = Role::all();
-        $rolesWithPermission = $permission->roles;
+        $rolesWithPermission = $permission->roles();
         return Inertia::render('admin/permissions/edit', ['permission' => $permission, 'roles' => $roles, 'rolesWithPermission' => $rolesWithPermission]);
     }
 

@@ -1,16 +1,16 @@
 <template>
-    <div class="py-12 w-full">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+    <div class="w-full py-12">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="p-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="flex p-2">
                     <Link
                         :href="route('admin.permissions.index')"
-                        class="px-4 py-2 bg-green-700 hover-bg-green-500 text-slate-100 rounded-md"
+                        class="px-4 py-2 bg-green-700 rounded-md hover-bg-green-500 text-slate-100"
                         >Permission Index</Link
                     >
                 </div>
                 <div class="flex flex-col p-2 bg-slate-100">
-                    <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
+                    <div class="w-1/2 mt-10 space-y-8 divide-y divide-gray-200">
                         <form @submit.prevent="submitForm" method="POST">
                             <div class="sm:col-span-6">
                                 <label
@@ -26,19 +26,19 @@
                                         id="name"
                                         name="name"
                                         :placeholder="permission.name"
-                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        class="block w-full px-3 py-2 text-base leading-normal transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md appearance-none sm:text-sm sm:leading-5"
                                     />
                                 </div>
                                 <span
                                     v-if="form.errors.name"
-                                    class="text-red-400 text-sm"
+                                    class="text-sm text-red-400"
                                     >{{ form.errors.name[0] }}</span
                                 >
                             </div>
-                            <div class="sm:col-span-6 pt-5">
+                            <div class="pt-5 sm:col-span-6">
                                 <button
                                     type="submit"
-                                    class="px-4 py-2 bg-green-500 hover-bg-green-700 rounded-md"
+                                    class="px-4 py-2 bg-green-500 rounded-md hover-bg-green-700"
                                 >
                                     Update
                                 </button>
@@ -46,14 +46,14 @@
                         </form>
                     </div>
                 </div>
-                <div class="mt-6 p-2 bg-slate-100">
+                <div class="p-2 mt-6 bg-slate-100">
                     <h2 class="text-2xl font-semibold">Roles</h2>
-                    <div class="flex space-x-2 mt-4 p-2">
+                    <div class="flex p-2 mt-4 space-x-2">
                         <template v-if="rolesWithPermission">
                             <form
                                 v-for="role in rolesWithPermission"
                                 :key="role.id"
-                                class="px-4 py-2 bg-red-500 hover-bg-red-700 text-white rounded-md"
+                                class="px-4 py-2 text-white bg-red-500 rounded-md hover-bg-red-700"
                                 @submit.prevent="removeRole(role.id)"
                             >
                                 <button type="submit">{{ role.name }}</button>
@@ -73,7 +73,7 @@
                                     id="role"
                                     name="role"
                                     autocomplete="role-name"
-                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus-outline-none focus-ring-indigo-500 focus-border-indigo-500 sm-text-sm"
+                                    class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus-outline-none focus-ring-indigo-500 focus-border-indigo-500 sm-text-sm"
                                 >
                                     <option
                                         v-for="role in roles"
@@ -87,14 +87,14 @@
                         </form>
                         <span
                             v-if="form.errors.role"
-                            class="text-red-400 text-sm"
+                            class="text-sm text-red-400"
                             >{{ form.errors.role[0] }}</span
                         >
                     </div>
-                    <div class="sm:col-span-6 pt-5">
+                    <div class="pt-5 sm:col-span-6">
                         <button
                             type="submit"
-                            class="px-4 py-2 bg-green-500 hover-bg-green-700 rounded-md"
+                            class="px-4 py-2 bg-green-500 rounded-md hover-bg-green-700"
                         >
                             Assign
                         </button>
@@ -133,7 +133,7 @@ export default {
             required: true,
         },
         rolesWithPermission: {
-            type: Array,
+            type: Object,
             required: true,
         },
     },
