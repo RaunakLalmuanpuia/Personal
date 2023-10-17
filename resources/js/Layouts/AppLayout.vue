@@ -7,9 +7,11 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import DropdownMenu from '@/Components/DropdownMenu.vue';
 
 defineProps({
     title: String,
+    
 });
 
 const showingNavigationDropdown = ref(false);
@@ -26,6 +28,11 @@ const logout = () => {
     router.post(route('logout'));
 };
 
+let isDropdownOpen = ref(false);
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
 
 </script>
 
@@ -53,9 +60,41 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink  :href="route('admin.index')" :active="route().current('admin.index')" >
+                                <!-- <NavLink  :href="route('admin.index')" :active="route().current('admin.index')" >
                                     ADMIN
-                                </NavLink>
+                                </NavLink> -->
+                               
+                                        <DropdownMenu class="mt-5"  v-if="$page.props.userRole === 'admin' ">
+                                        <!-- Define the trigger content -->
+                                        <template v-slot:trigger>
+                                            <button class="custom-button">Roles&Permission</button>
+                                        </template>
+
+                                        <!-- Define the dropdown items -->
+                                        <template v-slot:items>
+                                           
+                                            
+                                            <li class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9"> <Link :href="route('admin.roles.index')">Roles</Link></li>
+                                            <li class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9"> <Link :href="route('admin.permissions.index')">Permissions</Link></li>
+                                            <li class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9"> <Link :href="route('admin.users.index')" >Users</Link></li>
+                                        </template>
+                                        </DropdownMenu>
+                                    
+                                
+                                <!-- <div class="relative" @click="toggleDropdown">
+                                        <button class="px-4 py-2 text-white bg-blue-500 rounded">
+                                        Toggle Dropdown
+                                        </button>
+                                        <div v-if="isDropdownOpen" class="absolute top-0 left-0 mt-12 bg-white shadow-lg">
+                                            <ul>
+                                        <li><a href="#">Item 1</a></li>
+                                        <li><a href="#">Item 2</a></li>
+                                        <li><a href="#">Item 3</a></li>
+                                    </ul>
+                                        </div>
+                                    </div>
+                              -->
+
                                 
                                  <!-- Render the "ADMIN" link only if the user has the "admin" role and "manage-admin" permission -->
                                 

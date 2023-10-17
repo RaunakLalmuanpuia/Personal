@@ -1,18 +1,19 @@
 <template>
-    <div class="py-12 w-full">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
+    <AppLayout>
+    <div class="w-full py-12">
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="p-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
           <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                   <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                       <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                           Name
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                           Email
                         </th>
                         <th scope="col" class="relative px-6 py-3">
@@ -35,10 +36,10 @@
                         <td>
                           <div class="flex justify-end">
                             <div class="flex space-x-2">
-                                <Link :href="route('admin.users.show', user.id)" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Roles</Link>
-                              <!-- <inertia-link :href="route('admin.users.show', user.id)" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Roles</inertia-link> -->
+                                <Link :href="route('admin.users.show', user.id)" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700">Roles</Link>
+                              <!-- <inertia-link :href="route('admin.users.show', user.id)" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700">Roles</inertia-link> -->
                               <form id="submit"
-    class="px-4 py-2 bg-red-500 hover-bg-red-700 text-white rounded-md"
+    class="px-4 py-2 text-white bg-red-500 rounded-md hover-bg-red-700"
     @submit.prevent="deleteUser(user.id)"
   >
                             
@@ -57,13 +58,16 @@
         </div>
       </div>
     </div>
+  </AppLayout>
   </template>
   
   <script>
   import { Link } from '@inertiajs/vue3'
+  import AppLayout from '@/Layouts/AppLayout.vue';
   export default {
     components: {
         Link,
+        AppLayout
     },
 
     props: {

@@ -1,6 +1,5 @@
 <?php
 
-
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +36,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        $userRole = $user->roles->first()->name;
-        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray(); // Use Spatie's method to get permission names
+        $userRole = $user->roles->first()->name ?? null;
+        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray() ?? null; // Use Spatie's method to get permission names
         return Inertia::render('Dashboard', [
             'userRole' => $userRole,
             'userPermissions' => $userPermissions,
